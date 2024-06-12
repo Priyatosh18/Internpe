@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+public class SimpleBankingApp {
+    public static void main(String[] args) {
+        // Create a scanner object for input
+        Scanner scanner = new Scanner(System.in);
+
+        // Initialize variables
+        double balance = 0.0;
+        boolean exit = false;
+
+        // Display welcome message
+        System.out.println("Welcome to Simple Banking Application!");
+
+        // Loop for menu
+        while (!exit) {
+            // Display  options
+            
+            System.out.println("1. Check Balance");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+
+            // Read user choice
+            int choice = scanner.nextInt();
+
+            // Perform actions based on user choice
+            switch (choice) {
+                case 1:
+                    // Check balance
+                    checkBalance(balance);
+                    break;
+                case 2:
+                    // Deposit amount
+                    balance = deposit(scanner, balance);
+                    break;
+                case 3:
+                    // Withdraw amount
+                    balance = withdraw(scanner, balance);
+                    break;
+                case 4:
+                    // Exit
+                    exit = true;
+                    System.out.println("Thank you for using Simple Banking Application!");
+                    break;
+                default:
+                    // Invalid choice
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        // Close scanner
+        scanner.close();
+    }
+
+    // Method to check balance
+    public static void checkBalance(double balance) {
+        System.out.println("Current Balance: $" + balance);
+    }
+
+    // Method to deposit amount
+    public static double deposit(Scanner scanner, double balance) {
+        System.out.print("Enter deposit amount: $");
+        double amount = scanner.nextDouble();
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Successfully deposited $" + amount);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+        return balance;
+    }
+
+    // Method to withdraw amount
+    public static double withdraw(Scanner scanner, double balance) {
+        System.out.print("Enter withdrawal amount: $");
+        double amount = scanner.nextDouble();
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Successfully withdrew $" + amount);
+        } else {
+            System.out.println("Invalid withdrawal amount or insufficient balance.");
+        }
+        return balance;
+    }
+}
